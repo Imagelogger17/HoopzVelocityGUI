@@ -1,6 +1,4 @@
 -- velocityScript.lua
--- This script applies velocity to the player’s HumanoidRootPart to simulate jump shot momentum
-
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 local UserInputService = game:GetService("UserInputService")
@@ -10,8 +8,8 @@ local character = player.Character or player.CharacterAdded:Wait()
 local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
 
 local shooting = false
-local shootForce = Vector3.new(0, 50, 100) -- Adjust upward (Y) and forward (Z) force here
-local shootDuration = 0.5 -- Duration in seconds to apply velocity
+local shootForce = Vector3.new(0, 50, 100) -- Adjust force here
+local shootDuration = 0.5 -- seconds
 
 local function startShooting()
     if shooting then return end
@@ -31,7 +29,7 @@ local function startShooting()
     end)
 end
 
--- Example keybind: Press E to shoot (for testing)
+-- Press E to trigger shooting (for testing)
 UserInputService.InputBegan:Connect(function(input, gameProcessed)
     if gameProcessed then return end
     if input.KeyCode == Enum.KeyCode.E then
