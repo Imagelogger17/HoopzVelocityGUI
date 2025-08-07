@@ -1,15 +1,16 @@
--- velocityScript.lua
+-- velocityMobile.lua
+-- Mobile-friendly velocity jump shot triggered by a ScreenGui button
+
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
-local UserInputService = game:GetService("UserInputService")
 
 local player = Players.LocalPlayer
 local character = player.Character or player.CharacterAdded:Wait()
 local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
 
 local shooting = false
-local shootForce = Vector3.new(0, 50, 100) -- Adjust force here
-local shootDuration = 0.5 -- seconds
+local shootForce = Vector3.new(0, 50, 100)
+local shootDuration = 0.5
 
 local function startShooting()
     if shooting then return end
@@ -29,10 +30,9 @@ local function startShooting()
     end)
 end
 
--- Press E to trigger shooting (for testing)
-UserInputService.InputBegan:Connect(function(input, gameProcessed)
-    if gameProcessed then return end
-    if input.KeyCode == Enum.KeyCode.E then
-        startShooting()
-    end
+-- This script expects a button named "ShootButton" under the same parent
+local shootButton = script.Parent:WaitForChild("ShootButton")
+
+shootButton.Activated:Connect(function()
+    startShooting()
 end)
